@@ -1,0 +1,31 @@
+_satellite.pushAsyncScript(function(event, target, $variables){
+  _satellite.notify('Target Params for Recs: View Page',1);
+
+var pageType =  _satellite.getVar("pageType");
+
+if(pageType != 'productPage')
+{
+  adobe.target.getOffer({
+    "mbox": "target-global-mbox",
+    "params": {
+      "pageType" : _satellite.getVar("pageType")
+    },
+    "success": function(offer) {
+      adobe.target.applyOffer({
+        offer: offer
+      });
+      triggerRecsEvent();
+    },
+    "error": function(status, error) {
+      console.log(error)
+    }
+  });
+}
+
+function triggerRecsEvent() {
+  if(typeof mBoxData !== 'undefined' ) {
+    var mBoxEvent = new CustomEvent("mBoxReceived", { detail:mBoxData });
+    document.body.dispatchEvent(mBoxEvent);
+  }
+}
+});
