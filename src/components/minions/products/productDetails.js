@@ -2,10 +2,10 @@ import React from "react";
 
 import ProductsStore from "../../../dataStore/ProductsStore";
 
-import Features from "./detailsMinions/features";
-import Details from "./detailsMinions/details";
 import Overview from "./detailsMinions/overview";
+import Details from "./detailsMinions/details";
 import SocialIcons from "../extras/socialIcons";
+import Features from "./detailsMinions/features";
 import Recommended from "../extras/recommended";
 
 export default class ProductDetails extends React.Component {
@@ -31,7 +31,7 @@ export default class ProductDetails extends React.Component {
                         <ol className="breadcrumbs__list" data-test="breadcrumbs-list">
                             <li className="breadcrumbs__crumb"><a data-test="breadcrumb-link" href="/en-US/"><span className="markup">Home</span></a></li>
                             <li className="breadcrumbs__crumb"><a type="page" data-test="breadcrumb-link" href="/en-US/Architecture-ByTheme"><span className="markup">Architecture</span></a></li>
-                            <li className="breadcrumbs__crumb"><span className="markup" data-test="breadcrumb-page-title">Arc de Triomphe</span></li>
+                            <li className="breadcrumbs__crumb"><span className="markup" data-test="breadcrumb-page-title">{data.name_html}</span></li>
                         </ol>
                     </nav>
                     <Overview data={data} />
@@ -42,5 +42,6 @@ export default class ProductDetails extends React.Component {
                 <Recommended />
             </div>
         );
+
     }
 }

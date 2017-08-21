@@ -57,6 +57,10 @@ class generalTransections extends EventEmitter {
         return this.wishlistCount;
     }
 
+    getmBoxData() {
+        return window.mBoxData;
+    }
+
     dispatchHandler(action) {
         switch(action.type) {
             case "OVERLAY_CLICKED": 

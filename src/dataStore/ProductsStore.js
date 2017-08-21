@@ -37,9 +37,9 @@ class product extends EventEmitter {
          */
         var prodLength = this.productDetails.length;
         id = Math.floor(Math.random()*(prodLength-1)+1);
-        console.log(id);
+        // console.log(id);
         const ret = this.productDetails[id];
-        console.log(ret);
+        // console.log(ret);
         return ret;
     }
 
