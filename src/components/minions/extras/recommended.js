@@ -1,31 +1,81 @@
 import React from "react";
 import GeneralStore from "../../../dataStore/GeneralStore";
+import * as Actions from "../../../DispatcherActions";
 
-import ProductLeaf from "../products/listElements/productLeaf";
 
 import recommended from "../../../assets/svg/exclusives.svg";
 
 export default class Recommended extends React.Component {
 
     constructor(props) {
+
         super(props);
+
         this.state = {
             data: GeneralStore.getmBoxData()
         };
+
     }
 
     render() {
 
         var { recommendations } = this.state.data;
 
-        var listDataHtml = recommendations.map((pData, key) => {
-            return (
-                <div className="product-leaf" data-test={"product-leaf-"+pData.productCode} key={key}>
+        var listDataHtml = recommendations.map((pData, key) => <ProductLeaf key={key} data={pData}/>);
+
+        return (
+            <section className="recommended">
+                <div className="recommended__container">
+                    <div className="section-title">
+                        <h2><img src={recommended} alt="" data-test="section-title-image" /><span data-test="section-title"><span className="markup">Recommended</span></span></h2>
+                    </div>
+                    <div className="recommended__content">
+                        <div className="product-leaf-group" data-test="product-leaf-group">
+                            {listDataHtml}
+                        </div>
+                    </div>
+                </div>
+            </section>
+        );
+    }
+}
+
+class ProductLeaf extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            isFavorite: false
+        };
+
+    }
+
+    bagClickHandler(){
+        Actions.updateBag();
+    }
+
+    toggleFavorite() {
+        this.setState({isFavorite: !this.state.isFavorite});
+
+        if(this.state.isFavorite){
+            Actions.updateWishlist(-1);
+        }else{
+            Actions.updateWishlist(1);
+        }
+    }
+
+    render() {
+        var pData = this.props.data;
+
+        var isFavorite = this.state.isFavorite;
+        
+        return (
+            <div className="product-leaf" data-test={"product-leaf-"+pData.productCode}>
                     <div className="product-leaf__product">
                         <a className="product-leaf__link-image" data-test="product-leaf-link-image" href={"/en-US/"+pData.pageURL}>
                             <img src={"https://sh-s7-live-s.legocdn.com/is/image/LEGO/"+pData.productCode+"?$leaf2$"} alt="Series 17" />
                         </a>
-                        <button type="button" className="product-leaf__favourite" data-test="product-leaf-add-to-wishlist-heart"><span><span>ADD TO WISHLIST</span></span>
+                        <button type="button" onClick={this.toggleFavorite.bind(this)} className={isFavorite?"product-leaf__favourite--active":"product-leaf__favourite"} data-test="product-leaf-add-to-wishlist-heart"><span><span>ADD TO WISHLIST</span></span>
                         </button>
                     </div>
                     <div className="product-leaf__details"><span className="product-leaf__id" data-test="product-leaf-id">{pData.productCode}</span>
@@ -49,26 +99,10 @@ export default class Recommended extends React.Component {
                         </div>
                     </div>
                     <div className="product-leaf__cta" data-test="product-leaf-cta">
-                        <button type="button" className="product-leaf__cta-btn--orange" data-test="product-leaf-cta-add-to-cart"><span>ADD TO BAG</span>
+                        <button type="button" onClick={this.bagClickHandler.bind(this)} className="product-leaf__cta-btn--orange" data-test="product-leaf-cta-add-to-cart"><span>ADD TO BAG</span>
                         </button>
                     </div>
                 </div>
-            );
-        });
-
-        return (
-            <section className="recommended">
-                <div className="recommended__container">
-                    <div className="section-title">
-                        <h2><img src={recommended} alt="" data-test="section-title-image" /><span data-test="section-title"><span className="markup">Recommended</span></span></h2>
-                    </div>
-                    <div className="recommended__content">
-                        <div className="product-leaf-group" data-test="product-leaf-group">
-                            {listDataHtml}
-                        </div>
-                    </div>
-                </div>
-            </section>
         );
     }
 }

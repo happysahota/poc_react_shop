@@ -22,9 +22,12 @@ class product extends EventEmitter {
 
     getProducts() {       
         
-        const ret = this.products[this.productID];
-        this.emit("ProductsListLoaded");  
-        this.productID = this.productID === 1 ? 0:1;
+        
+        var prodLength = this.products.length;
+        var id = Math.floor(Math.random()*(prodLength-1)+1);
+
+        const ret = this.products[id];
+        this.emit("ProductsListLoaded"); 
         return ret;
 
     }

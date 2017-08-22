@@ -31,7 +31,7 @@ export default class ProductLeaf extends React.Component {
 
         var data = this.props.data;
 
-        var url = "/en-US/"+data.seo_path;
+        var url = "/en-US/"+data.seo_path+"/details";
         var listPrice = data.skus[0].list_price;
 
         var ratingStyle = {
