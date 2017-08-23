@@ -44,6 +44,17 @@ class product extends EventEmitter {
         return ret;
     }
 
+    updateProductDetails(data) {
+        this.productDetails = data;
+        
+        this.emit("ProductDataLoaded");
+    }
+
+    getProductData() {
+        console.log(this.productDetails);
+        return this.productDetails;
+    }
+
     requestBasket(sku) {
         // axios.post('https://education.lego.com/en-us/scom/services/Basket/BasketService.ashx/add', {
         //     SkuNumber: sku, Quantity: 1

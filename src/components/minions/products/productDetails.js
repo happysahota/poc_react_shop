@@ -26,22 +26,23 @@ export default class ProductDetails extends React.Component {
     }
 
 	componentWillMount() {
-		ProductsStore.on("ProductsListLoaded", this.reloadProductDetails.bind(this));
+		ProductsStore.on("ProductDataLoaded", this.reloadProductDetails.bind(this));
 	}
 
 	componentWillUnmount() {
-		ProductsStore.removeListener("ProductsListLoaded", this.reloadProductDetails.bind(this));
+		ProductsStore.removeListener("ProductDataLoaded", this.reloadProductDetails.bind(this));
 	}
 
 	reloadProductDetails() {
 		this.setState({
-			ProductsList: ProductsStore.getProducts()
+			productDetails: ProductsStore.getProductData()
 		})
 	}
 
     render() {
-
-        var data = this.state.productDetails;
+        if(!this.state.productDetails) { return null; }
+        var data = this.state.productDetails[0];
+        console.log("------<", data);
         document.title = data.window_title;
         
         return (

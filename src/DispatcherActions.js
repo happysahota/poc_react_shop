@@ -102,7 +102,7 @@ export function updateWishlist(qnt) {
 
 export function loadProdDetails(id) {
 
-    var url = productDetailsURL+"/"+id;
+    var url = productDetailsURL+id;
     // console.info(`------------> ${url}`);
     axios.get(url)
         .then(function (response) {
