@@ -1,6 +1,7 @@
 import React from "react";
 
 import ProductsStore from "../../../dataStore/ProductsStore";
+import * as Actions from "../../../DispatcherActions";
 
 import Overview from "./detailsMinions/overview";
 import Details from "./detailsMinions/details";
@@ -17,7 +18,26 @@ export default class ProductDetails extends React.Component {
             productDetails: ProductsStore.getProduct()
         }
 
+        this.categ = this.props.match.params.categ;
+        this.catId = this.props.match.params.catId;
+
+        Actions.loadProdDetails(this.catId);
+        
     }
+
+	componentWillMount() {
+		ProductsStore.on("ProductsListLoaded", this.reloadProductDetails.bind(this));
+	}
+
+	componentWillUnmount() {
+		ProductsStore.removeListener("ProductsListLoaded", this.reloadProductDetails.bind(this));
+	}
+
+	reloadProductDetails() {
+		this.setState({
+			ProductsList: ProductsStore.getProducts()
+		})
+	}
 
     render() {
 

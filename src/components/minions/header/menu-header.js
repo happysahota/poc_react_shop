@@ -62,30 +62,6 @@ export default class MenuHeader extends React.Component {
                         <div className="main-bar__divider" data-rtest="51"></div>
                         <ul className="main-bar__nav-items" data-rtest="52">
                             {MainBarNavItemsLis}
-                            {/*<li data-rtest="53">
-                                <div id="main-bar-dropdown-sets" className="dropdown" data-test="main-bar-dropdown-sets" data-rtest="54">
-                                    <a className="dropdown__trigger" onClick={this.menuClickHandler.bind(this)} data-test="main-bar-trigger-sets" href="https://shop.lego.com/en-US/Sets-Home" data-rtest="55">
-                                        <span data-rtest="56">SETS</span>
-                                    </a>
-                                    {  showSubMenu && <DropDownContent/>  }                                    
-                                </div>
-                            </li>
-                            <li data-rtest="58">
-                                <div id="main-bar-dropdown-exclusives" className="dropdown" data-test="main-bar-dropdown-exclusives" data-rtest="59"><a className="dropdown__trigger" data-test="main-bar-trigger-exclusives" href="https://shop.lego.com/en-US/Exclusives-Home" data-rtest="60"><span data-rtest="61">EXCLUSIVES</span></a>
-                                </div>
-                            </li>
-                            <li data-rtest="63">
-                                <div id="main-bar-dropdown-bricks" className="dropdown" data-test="main-bar-dropdown-bricks" data-rtest="64"><a className="dropdown__trigger" data-test="main-bar-trigger-bricks" href="https://shop.lego.com/en-US/Bricks-Home" data-rtest="65"><span data-rtest="66">BRICKS</span></a>
-                                </div>
-                            </li>
-                            <li data-rtest="68">
-                                <div id="main-bar-dropdown-extras" className="dropdown" data-test="main-bar-dropdown-extras" data-rtest="69"><a className="dropdown__trigger" data-test="main-bar-trigger-extras" href="https://shop.lego.com/en-US/Extras-Home" data-rtest="70"><span data-rtest="71">EXTRAS</span></a>
-                                </div>
-                            </li>
-                            <li data-rtest="73">
-                                <div id="main-bar-dropdown-discover" className="dropdown" data-test="main-bar-dropdown-discover" data-rtest="74"><a className="dropdown__trigger" data-test="main-bar-trigger-discover" href="https://shop.lego.com/en-US/Discover-Home" data-rtest="75"><span data-rtest="76">DISCOVER</span></a>
-                                </div>
-                            </li>*/}
                         </ul>
                     </nav>
                     <div className="main-bar__wrapper--right" data-rtest="78">

@@ -15,6 +15,7 @@ export default class DropDownContent extends React.Component {
      */
     linkClickHandler(e) {
         Actions.DropMenuClicked();
+
     }
 
     render() {

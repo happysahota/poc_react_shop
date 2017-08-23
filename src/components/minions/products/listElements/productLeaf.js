@@ -27,6 +27,10 @@ export default class ProductLeaf extends React.Component {
         }
     }
 
+    loadProdDetails() {
+        Actions.loadProdDetails();
+    }
+
     render() {
 
         var data = this.props.data;
@@ -43,7 +47,7 @@ export default class ProductLeaf extends React.Component {
 
         return (
             <div className="product-leaf" data-test="product-leaf-10258">
-                <div className="product-leaf__product"><a className="product-leaf__link-image" data-test="product-leaf-link-image" href={url}><img src={data.media} alt={data.name_html} /></a>
+                <div className="product-leaf__product"><a onClick={this.loadProdDetails.bind(this)} className="product-leaf__link-image" data-test="product-leaf-link-image" href={url}><img src={data.media} alt={data.name_html} /></a>
                     <button type="button" onClick={this.toggleFavorite.bind(this)} className={isFavorite?"product-leaf__favourite--active":"product-leaf__favourite"} data-test="product-leaf-add-to-wishlist-heart">
                         <span><span>ADD TO WISHLIST</span></span>
                     </button>
@@ -53,7 +57,7 @@ export default class ProductLeaf extends React.Component {
                         { data.featured==="newFlag" && <div className="badges__flag" data-test="product-flag">New</div> }
                     </div><span className="product-leaf__id" data-test="product-leaf-id">{data.product_code}</span>
                     <h2 className="product-leaf__title" data-test="product-leaf-title">
-                        <a className="product-leaf__link-title" data-test="product-leaf-link-title" href={url}>
+                        <a className="product-leaf__link-title" onClick={this.loadProdDetails.bind(this)} data-test="product-leaf-link-title" href={url}>
                             <span className="markup" dangerouslySetInnerHTML={{__html:data.name_html}}></span>
                         </a>
                     </h2>

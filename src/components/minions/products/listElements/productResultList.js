@@ -4,8 +4,9 @@ import AsideSection from "./asideSection";
 import ProductLeaf from "./productLeaf";
 
 export default class ProductResultList extends React.Component {
+    
     render() {
-        
+
         var data = this.props.data;
         var listData = data.results;
 

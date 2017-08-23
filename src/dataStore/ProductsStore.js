@@ -1,9 +1,7 @@
-import {EventEmitter} from "events";
+import { EventEmitter } from "events";
 import dispatcher from "../Dispatcher";
 
 import * as Actions from "../DispatcherActions";
-
-import axios from "axios";
 
 class product extends EventEmitter {
     constructor() {
@@ -14,32 +12,32 @@ class product extends EventEmitter {
         */
         this.productID = 1;
 
-        this.products = window.__MockData__;
-        this.productDetails = window.__productDetails__;
+        this.productsURL = window.prodListPage;
+        this.productDetailsURL = window.prodDetaPage;
+
+        this.products = [];
+        this.productDetails = [];
 
         this.basket = {};
     }
 
-    getProducts() {       
-        
-        
-        var prodLength = this.products.length;
-        var id = Math.floor(Math.random()*(prodLength-1)+1);
-
-        const ret = this.products[id];
-        this.emit("ProductsListLoaded"); 
-        return ret;
-
+    getProducts() {
+        return this.products;
     }
 
-    getProduct(id){
+    updateProductList(data) {
+        this.products = data;
+        this.emit("ProductsListLoaded");
+    }
+
+    getProduct(id) {
         this.emit("ProductLoaded");
-        
+
         /**
          * Code Demo Start Which need to update with dynamic
          */
         var prodLength = this.productDetails.length;
-        id = Math.floor(Math.random()*(prodLength-1)+1);
+        id = Math.floor(Math.random() * (prodLength - 1) + 1);
         // console.log(id);
         const ret = this.productDetails[id];
         // console.log(ret);
@@ -57,11 +55,11 @@ class product extends EventEmitter {
         //     console.log(error);
         // });
 
-        setTimeout(()=>{
-            this.basket = {"BasketLines":[{"ItemPrice":"$34.95","LinePrice":"$34.95","Name":"Animal Bingo","ImageSrc":"https://le-www-live-s.legocdn.com/images/423923/live/sc/Products/45009/45009_Prod_02/b65bab3ad535f8857380986f057f8f7c/eba00a0b-c6bc-4fa9-b857-a40601160c15/original/eba00a0b-c6bc-4fa9-b857-a40601160c15.jpg","ProductNumber":"45009","ShortName":"Animal Bingo","SkuNumber":"6100408","Quantity":1,"Url":null},{"ItemPrice":"$69.95","LinePrice":"$69.95","Name":"Build Me \"Emotions\"","ImageSrc":"https://le-www-live-s.legocdn.com/images/423923/live/sc/Products/45018/45018_1050x1050_1_xx-xx/d5ac5288803b40bdd500948bf24c8572/482e1667-9b9d-4640-94e6-a59b0140624c/original/482e1667-9b9d-4640-94e6-a59b0140624c.jpg","ProductNumber":"45018","ShortName":"Build Me \"Emotions\"","SkuNumber":"6138608","Quantity":1,"Url":null}],"Message":"Success","TotalPrice":"$104.90","TotalQuantity":2}
+        setTimeout(() => {
+            this.basket = { "BasketLines": [{ "ItemPrice": "$34.95", "LinePrice": "$34.95", "Name": "Animal Bingo", "ImageSrc": "https://le-www-live-s.legocdn.com/images/423923/live/sc/Products/45009/45009_Prod_02/b65bab3ad535f8857380986f057f8f7c/eba00a0b-c6bc-4fa9-b857-a40601160c15/original/eba00a0b-c6bc-4fa9-b857-a40601160c15.jpg", "ProductNumber": "45009", "ShortName": "Animal Bingo", "SkuNumber": "6100408", "Quantity": 1, "Url": null }, { "ItemPrice": "$69.95", "LinePrice": "$69.95", "Name": "Build Me \"Emotions\"", "ImageSrc": "https://le-www-live-s.legocdn.com/images/423923/live/sc/Products/45018/45018_1050x1050_1_xx-xx/d5ac5288803b40bdd500948bf24c8572/482e1667-9b9d-4640-94e6-a59b0140624c/original/482e1667-9b9d-4640-94e6-a59b0140624c.jpg", "ProductNumber": "45018", "ShortName": "Build Me \"Emotions\"", "SkuNumber": "6138608", "Quantity": 1, "Url": null }], "Message": "Success", "TotalPrice": "$104.90", "TotalQuantity": 2 }
             this.emit("BasketUpdated");
             Actions.toggleMiniCart();
-        },3000);
+        }, 3000);
 
     }
 
@@ -70,8 +68,8 @@ class product extends EventEmitter {
     }
 
     dispatchHandler(action) {
-        switch(action.type) {
-            case "Load_PRODUCT_LIST": 
+        switch (action.type) {
+            case "Load_PRODUCT_LIST":
                 this.getProducts();
                 break;
             case "Load_PRODUCT":
@@ -80,11 +78,17 @@ class product extends EventEmitter {
             case "ADD_BASKET":
                 this.requestBasket(action.sku);
                 break;
+            case "PRODUCT_LIST_UPDATED":
+                this.updateProductList(action.data);
+                break;
+            case "PRODUCT_DETAILS_UPDATED":
+                this.updateProductDetails(action.data);
+                break;
         }
     }
 }
 
-const ProductsStore  = new product;
+const ProductsStore = new product;
 dispatcher.register(ProductsStore.dispatchHandler.bind(ProductsStore));
 
 export default ProductsStore;
