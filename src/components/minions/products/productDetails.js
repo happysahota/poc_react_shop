@@ -42,8 +42,8 @@ export default class ProductDetails extends React.Component {
     render() {
         if(!this.state.productDetails) { return null; }
         
-        // var data = this.state.productDetails[0];
         var data = this.state.productDetails;
+        // var data = this.state.productDetails;
         console.log("------<", data);
         document.title = data.window_title;
         
