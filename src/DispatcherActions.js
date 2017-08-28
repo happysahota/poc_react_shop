@@ -102,6 +102,8 @@ export function updateWishlist(qnt) {
 
 export function loadProdDetails(id) {
 
+    var idArr = id.split("-");
+    var id = idArr[(idArr.length-1)]
     var url = productDetailsURL+id;
     // console.info(`------------> ${url}`);
     axios.get(url)
