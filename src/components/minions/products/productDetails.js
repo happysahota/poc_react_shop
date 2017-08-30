@@ -20,8 +20,9 @@ export default class ProductDetails extends React.Component {
 
         this.categ = this.props.match.params.categ;
         this.catId = this.props.match.params.catId;
+        this.locale = this.props.match.params.locale;
 
-        Actions.loadProdDetails(this.catId);
+        Actions.loadProdDetails(this.locale, this.catId);
         
     }
 
@@ -43,7 +44,7 @@ export default class ProductDetails extends React.Component {
     render() {
         if(!this.state.productDetails) { return null; }
         
-        var data = this.state.productDetails;
+        var data = this.state.productDetails[0];
         // var data = this.state.productDetails;
         // console.log("------<", data);
         document.title = data.window_title;

@@ -28,7 +28,12 @@ export default class ProductLeaf extends React.Component {
     }
 
     loadProdDetails() {
-        Actions.loadProdDetails();
+
+        this.categ = this.props.match.params.categ;
+        this.catId = this.props.match.params.catId;
+        this.locale = this.props.match.params.locale;
+
+        Actions.loadProdDetails(this.locale, this.catId);
     }
 
     render() {

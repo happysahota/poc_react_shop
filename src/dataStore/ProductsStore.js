@@ -51,7 +51,6 @@ class product extends EventEmitter {
     }
 
     getProductData() {
-        console.log(this.productDetails);
         return this.productDetails;
     }
 
