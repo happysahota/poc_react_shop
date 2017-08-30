@@ -6,6 +6,7 @@ import axios from "axios";
 
 var productsURL = window.prodListPage;
 var productDetailsURL = window.prodDetaPage;
+var pageDataUrl = window.pageData;
 
 export function getProductsList() {
     dispatcher.dispatch({
@@ -47,10 +48,22 @@ export function toggleOverlay() {
 }
 
 export function fetchPageData(pageType) {
-    dispatcher.dispatch({
-        type: 'PAGE_DATA',
-        pagetype: pageType
+
+    axios.get(pageDataUrl)
+    .then(function (response) {
+        dispatcher.dispatch({
+            type: "PAGE_DATA",
+            data: response.data
+        });
+    })
+    .catch(function (error) {
+        console.log(error);
     });
+
+    // dispatcher.dispatch({
+    //     type: 'PAGE_DATA',
+    //     pagetype: pageType
+    // });
 }
 
 export function addToBasket(sku) {

@@ -35,8 +35,8 @@ class App extends Component {
   }
 
   render() {
-
-		document.title = this.state.pageData.dynamicPage.content.window_title;
+    if(this.state.pageData)
+      document.title = this.state.pageData.dynamicPage.content.window_title;
 
     return (
       <div className="wrapper">

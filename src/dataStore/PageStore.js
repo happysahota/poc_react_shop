@@ -9,9 +9,9 @@ class page extends EventEmitter {
         this.fetchPageDetails();
     }
 
-    fetchPageDetails(pageType) {
+    fetchPageDetails(data) {
         // this.pageData = pageType ? this.pagesData[pageType]:this.pagesData.productList;
-        this.pageData = pageType ? this.pagesData[pageType]:window.__INITIAL_STATE__;
+        this.pageData = data ? data:window.__INITIAL_STATE__;
         this.emit("NewPageDataAvailable");      
     }
 
@@ -22,7 +22,7 @@ class page extends EventEmitter {
     dispatchHandler(action) {
         switch(action.type) {
             case "PAGE_DATA": 
-                this.fetchPageDetails(action.pagetype);
+                this.fetchPageDetails(action.data);
                 break;
         }
     }

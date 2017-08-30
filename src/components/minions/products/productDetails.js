@@ -34,6 +34,7 @@ export default class ProductDetails extends React.Component {
 	}
 
 	reloadProductDetails() {
+        Actions.fetchPageData();
 		this.setState({
 			productDetails: ProductsStore.getProductData()
 		})
@@ -44,7 +45,7 @@ export default class ProductDetails extends React.Component {
         
         var data = this.state.productDetails;
         // var data = this.state.productDetails;
-        console.log("------<", data);
+        // console.log("------<", data);
         document.title = data.window_title;
         
         return (
